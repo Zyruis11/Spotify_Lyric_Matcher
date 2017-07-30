@@ -1,0 +1,44 @@
+<template name="ui_components_forms_searchForm">
+    <div class="row">
+        <form class="searchForm">
+            <div class="input-field col s6">
+                <input placeholder="Artist Name" id="artistName" type="text" class="validate">
+                <label for="artistName">Artist Name</label>
+            </div>
+
+            <div class="input-field col s6">
+                <input type="submit" class="validate btn submit">
+            </div>
+        </form>
+    </div>
+    <input type="button" class="btn" id="memes" value="Doot">
+    {{>ui_components_forms_searchFormArtistResults}}
+    {{>ui_components_forms_searchFormAlbumResults}}
+    {{>ui_components_spotifyPlayer albumURI = getAlbumURI width=300 height=380}}
+</template>
+
+<template name="ui_components_forms_searchFormArtistResults">
+    {{#each artist in getArtists}}
+        <div class="row">
+            {{artist.name}}
+            {{#each artistImg in artist.images}}
+                {{#if smallImg artistImg.height}}
+                    <a href="#" class="artistImg" id={{artist.id}}><img src={{artistImg.url}} id={{artist.id}} alt="artistImage" height="100" width="100"></a>
+                {{/if}}
+            {{/each}}        
+        </div>
+    {{/each}}
+</template>
+
+<template name="ui_components_forms_searchFormAlbumResults">
+{{#each album in getAlbums}}
+    <div class="row">
+        {{album.name}}
+        {{#each albumImg in album.images}}
+            {{#if smallImg albumImg.height}}
+                <a href="#" class="albumImg" id={{artist.id}}><img src={{albumImg.url}} id={{album.id}} alt="albumImg" height="100" width="100"></a>
+            {{/if}}
+        {{/each}}   
+    </div>
+{{/each}}
+</template> 
