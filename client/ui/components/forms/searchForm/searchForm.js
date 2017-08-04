@@ -11,8 +11,11 @@ Template.ui_components_forms_searchForm.events({
         event.preventDefault();
         var artistName = $("#artistName").val();
         if (artistName) {
-            Meteor.call('searchArtists', artistName, 5, function (err, response) {
+            Meteor.call('searchArtists', artistName, 10, function (err, response) {
                 Session.set("artistInfo", response.artists.items);
+            });
+            Meteor.call('getMusixArtist',artistName,function(err,response){
+                console.log(response);
             });
         }
 
@@ -37,7 +40,7 @@ Template.ui_components_forms_searchFormArtistResults.helpers({
 
 Template.ui_components_forms_searchFormArtistResults.events({
     'click .artistImg':function(){
-        Meteor.call('fetchArtistAlbums',event.target.id,5,function(err,response){
+        Meteor.call('fetchArtistAlbums',event.target.id,20,function(err,response){
             Session.set("albumInfo",response.items);
             console.log(response.items);
         });

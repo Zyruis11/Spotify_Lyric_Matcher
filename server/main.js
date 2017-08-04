@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
-
+import { apiKeys } from "./config.js";
 Meteor.startup(() => {
     ServiceConfiguration.configurations.update(
         { "service": "spotify" },
         {
             $set: {
-                "clientId": "SPOTIFY CLIENT KEY HERE",
-                "secret": "SPOTIFY SECRET HERE"
+                "clientId": apiKeys.spotifyClient,
+                "secret": apiKeys.spotifySecret
             }
         },
         { upsert: true }
